@@ -1,0 +1,40 @@
+﻿
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "POC.AutomatedTesting.gRPC";
+
+package PacPlatformTeamMember;
+
+// The greeting service definition.
+service PacPlatformTeamMemberService {
+    
+  rpc GetTeamMember (TeamMemberId) returns (TeamMember);
+  rpc GetTeamMemberByRole (TeamMemberRole) returns (TeamMembers);
+  rpc GetAllCurrentTeamMembers (google.protobuf.Empty) returns (TeamMembers);
+  rpc AddTeamMember (TeamMember) returns (TeamMember);
+  rpc DeleteTeamMember (TeamMemberId) returns (TeamMembers);
+  rpc UpdateTeamMember (TeamMember) returns (TeamMember);
+}
+
+
+message TeamMemberRole {
+    string  RoleName = 1;
+}
+
+message TeamMemberId {
+    int32  Id = 1;
+}
+
+// The request message containing the user's name.
+message TeamMember {
+  int32  Id = 1;
+  optional string Name = 2;
+  optional string Email = 3;
+  optional string Role = 4;
+}
+
+message TeamMembers {
+  repeated  TeamMember TeamMember = 1;
+}
