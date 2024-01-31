@@ -9,23 +9,18 @@ static_resources:
             - name: envoy.http_connection_manager
               config:
                 codec_type: http2
-                stat_prefix: ingress_grpc
-                http2_protocol_options: {}
+                stat_prefix: ingress_grpc                
                 route_config:
                   name: service_route
                   virtual_hosts:
                     - name: service_host
-                      domains:
-                        - "*"
+                      domains: ["*"]
                       routes:
-                        - match:
-                            prefix: "/"
-                            grpc: {}
+                        - match: { prefix: "/" }
                           route:
                             cluster: service_cluster
-                            timeout:
-                              seconds: 0
-                              nanos: 0
+                            max_grpc_timeout: 0s
+                            timeout: 0s
                 http_filters:
                   - name: envoy.router                
   clusters:
