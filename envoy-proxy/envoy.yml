@@ -28,7 +28,10 @@ static_resources:
                               nanos: 0
                 http_filters:
                   - name: envoy.router
-                    config: {}
+                    config: 
+                        codec_type: http2
+                        stat_prefix: ingress_grpc
+                        http2_protocol_options: {}
   clusters:
     - name: service_cluster
       connect_timeout: 0.25s
