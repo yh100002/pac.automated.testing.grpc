@@ -1,4 +1,4 @@
-FROM envoyproxy/envoy:latest
+FROM envoyproxy/envoy:v1.29-latest
 
 
 COPY start-envoy.sh /start-envoy.sh
