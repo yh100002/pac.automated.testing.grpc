@@ -38,10 +38,15 @@ static_resources:
       type: strict_dns
       lb_policy: round_robin
       http2_protocol_options: {}
-      hosts:
-        - socket_address:
-            address: $SERVICE_DISCOVERY_ADDRESS
-            port_value: $SERVICE_DISCOVERY_PORT
+      load_assignment:
+        cluster_name: service_cluster
+        endpoints:
+           - lb_endpoints:
+             - endpoint:
+                address:
+                  socket_address:
+                    address: $SERVICE_DISCOVERY_ADDRESS
+                    port_value: $SERVICE_DISCOVERY_PORT
 admin:
   access_log_path: "/dev/null"
   address:
